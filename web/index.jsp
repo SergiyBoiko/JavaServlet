@@ -7,9 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="cartNameBean" class="ghub.boiko.beans.CartNameBean" scope="session"/>
-<jsp:useBean id="cartMessageBean" class="ghub.boiko.beans.CartMessageBean" scope="session"/>
-<jsp:useBean id="cartDropDownOptionsBean" class="ghub.boiko.beans.CartDropDownOptionsBean" scope="session"/>
+<jsp:useBean id="cartName" class="ghub.boiko.cart.CartName" scope="session"/>
+<jsp:useBean id="cartMessage" class="ghub.boiko.cart.CartMessage" scope="session"/>
+<jsp:useBean id="cartDropDownOption" class="ghub.boiko.cart.CartDropDownOption" scope="session"/>
 <html>
 <head>
     <title>Simple page</title>
@@ -23,7 +23,7 @@
         <p><b>Enter message:</b><br>
             <textarea name="message" placeholder="Message" cols="31" rows="3"></textarea>
         </p>
-        <p><select name="dropdownoptions">
+        <p><select name="dropdownoption">
             <option disabled>Choose options</option>
             <option value="1" selected>1</option>
             <option value="2">2</option>
@@ -35,17 +35,17 @@
             <table>
                 <tr>
                     <td>
-                        <c:forEach items="${cartDropDownOptionsBean.dropDownOption}" var="dropdownoptions">
-                            <span>${dropdownoptions}</span> </br />
+                        <c:forEach items="${cartDropDownOption.dropDownOption}" var="dropdownoption">
+                            <span>${dropdownoption}</span> </br />
                         </c:forEach>
                     </td>
                     <td>
-                        <c:forEach items="${cartNameBean.name}" var="name">
+                        <c:forEach items="${cartName.name}" var="name">
                             <span>${name}</span> </br />
                         </c:forEach>
                     </td>
                     <td>
-                        <c:forEach items="${cartMessageBean.message}" var="massege">
+                        <c:forEach items="${cartMessage.message}" var="massege">
                             <span>${massege}</span> </br />
                         </c:forEach>
                     </td>

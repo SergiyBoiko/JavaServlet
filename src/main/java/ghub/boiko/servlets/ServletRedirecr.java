@@ -1,11 +1,10 @@
 package ghub.boiko.servlets;
 
-import ghub.boiko.beans.CartDropDownOptionsBean;
-import ghub.boiko.beans.CartMessageBean;
-import ghub.boiko.beans.CartNameBean;
+import ghub.boiko.cart.CartDropDownOption;
+import ghub.boiko.cart.CartMessage;
+import ghub.boiko.cart.CartName;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,38 +25,26 @@ public class ServletRedirecr extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(true);
-        CartNameBean cartNameBean = CartNameBean.get(session);
+        CartName cartName = CartName.get(session);
             for(String value : request.getParameterValues("name")) {
                 if (!value.trim().isEmpty()) {
-                    cartNameBean.addName(value.trim());
+                    cartName.addName(value.trim());
                 }
             }
-        CartMessageBean cartMessageBean = CartMessageBean.get(session);
-        for(String value : request.getParameterValues("message")) {
-            if (!value.trim().isEmpty()) {
-                cartMessageBean.addMessage(value.trim());
+        CartMessage cartMessage = CartMessage.get(session);
+            for(String value : request.getParameterValues("message")) {
+                if (!value.trim().isEmpty()) {
+                    cartMessage.addMessage(value.trim());
+                }
             }
-        }
 
-        CartDropDownOptionsBean cartDropDownOptionsBean = CartDropDownOptionsBean.get(session);
-        for(String value : request.getParameterValues("dropdownoptions")) {
-            if (!value.trim().isEmpty()) {
-                cartDropDownOptionsBean.addDropDownOptions(value.trim());
+        CartDropDownOption cartDropDownOption = CartDropDownOption.get(session);
+            for(String value : request.getParameterValues("dropdownoption")) {
+                if (!value.trim().isEmpty()) {
+                    cartDropDownOption.addDropDownOption(value.trim());
+                }
             }
-        }
-
 
         response.sendRedirect("/index.jsp");
     }
-
-//    private <T> void cartClassCartBean(T nameBean, HttpServletRequest request, String attribute){
-//        HttpSession session = request.getSession(true);
-//        nameBean = T.get(session);
-//        for(String value : request.getParameterValues("name")) {
-//            if (!value.trim().isEmpty()) {
-//                cartNameBean.addName(value.trim());
-//            }
-//        }
-//    }
-
 }
